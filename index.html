@@ -6,7 +6,12 @@
     <title>TODO-List</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="index">
+    <h1>TODO-list</h1>
+    <form action="" id="addListItem" onsubmit="event.preventDefault();">
+        <input autofocus type="text" name="listItemContent" placeholder="Add task" id="listItemContent" class="inputfield">
+        <input type="submit" value="Add" id="submitListItem" class="button">
+    </form>
     <script src="script.js"></script>
 </body>
 </html>
