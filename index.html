@@ -9,7 +9,7 @@
 <body id="index">
     <div id="appcontent">
         <h1>TODO-list</h1>
-        <form action="" id="addListItem" onsubmit="event.preventDefault(); addTask(this.listItemContent.value)" autocomplete="off">
+        <form action="" id="addListItem" onsubmit="event.preventDefault(); if(listItemContent.value){addTask(this.listItemContent.value);}" autocomplete="off">
             <input autofocus type="text" name="listItemContent" placeholder="Add task" id="listItemContent" class="inputfield">
             <input type="submit" value="+" id="submitListItem" class="button">
         </form>
