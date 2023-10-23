@@ -1,0 +1,59 @@
+*{
+    font-family:  Helvetica, sans-serif;
+}
+body{
+    background-color: navy;
+}
+ul {
+    padding: 0%;
+}
+button, #submitListItem{
+    background-color: rgb(255, 68, 0);
+    color: white;
+    font-size: 2vh;
+    border-radius: 5px;
+}
+#submitListItem{
+    padding: 1.5vh, 2vh;
+    font-size: 2.5vh;
+    border-radius: 100px;
+}
+li{
+    list-style-type: none;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 0.5vh;
+    padding-top: 0.5vh;
+}
+li button{
+    right: 5vh;
+    position: absolute;
+    background-color: rgb(255, 68, 0);
+    color: white;
+    font-size: 2vh;
+    border-radius: 5px;
+}
+li button:hover, #submitListItem:hover{
+    background-color: rgb(206, 55, 0);
+}
+li input{
+    left: 5vh;
+    position: absolute;
+}
+
+#appcontent{
+    background-color: white;
+    width: 40%;
+    padding: 5vh;
+    border-radius: 25px;
+    text-align: center;
+    margin: auto;
+    margin-top: 10vh;
+}
+
+#listItemContent{
+    border-radius: 100px;
+    padding: 2vh;
+    width: 30vh;
+}

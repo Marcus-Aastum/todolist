@@ -15,13 +15,12 @@ function updateTasks(){
         let listElement = document.createElement("li");
         listElement.id = "task_" + tasklist[index].id;
         let contentText = document.createTextNode(tasklist[index].text);
-        listElement.appendChild(contentText);
-
+        
         let checkbox = document.createElement("input"); 
         checkbox.type = "checkbox";
         checkbox.setAttribute("onchange", "checkboxChange(this)");
         checkbox.id = "checkbox_" + tasklist[index].id;
-
+        
         let deletebutton = document.createElement("button");
         let deleteText = document.createTextNode("Delete");
         deletebutton.setAttribute("onclick", "deleteTask(this)");
@@ -34,6 +33,7 @@ function updateTasks(){
             listElement.style.textDecoration = "none";
         }
         listElement.appendChild(checkbox);
+        listElement.appendChild(contentText);
         listElement.appendChild(deletebutton);
         taskListElement.appendChild(listElement);        
     }
