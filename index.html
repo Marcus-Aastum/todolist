@@ -8,7 +8,7 @@
 </head>
 <body id="index">
     <h1>TODO-list</h1>
-    <form action="" id="addListItem" onsubmit="event.preventDefault(); createTaskList(this.listItemContent.value)">
+    <form action="" id="addListItem" onsubmit="event.preventDefault(); createTaskList(this.listItemContent.value)" autocomplete="off">
         <input autofocus type="text" name="listItemContent" placeholder="Add task" id="listItemContent" class="inputfield">
         <input type="submit" value="Add" id="submitListItem" class="button">
     </form>
