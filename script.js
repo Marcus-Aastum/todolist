@@ -1,5 +1,5 @@
 let tasklist = [];
-function createTaskList(textContent){
+function addTask(textContent){
     tasklist.push({id: tasklist.length, text: textContent, checked: false});
     document.getElementById("listItemContent").value = "";
     updateTasks()
