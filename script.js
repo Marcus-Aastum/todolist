@@ -1,7 +1,7 @@
 let tasklist = [];
 function createTaskList(textContent){
     tasklist.push({id: tasklist.length, text: textContent, checked: false});
-    console.log(tasklist)
+    document.getElementById("listItemContent").value = "";
     updateTasks()
 }
 function updateTasks(){
