@@ -1,4 +1,5 @@
 let tasklist = [];
+let deletedTasks = 0;
 function addTask(textContent){
     tasklist.push({id: tasklist.length, text: textContent, checked: false});
     document.getElementById("listItemContent").value = "";
@@ -8,6 +9,8 @@ function updateTasks(){
     taskListElement = document.getElementById("taskList");
     taskListElement.innerHTML = "";
 
+    let numberOfChecked = 0;
+    
     for (let index = 0; index < tasklist.length; index++) {
         if (!tasklist[index]){
             continue;
@@ -28,6 +31,7 @@ function updateTasks(){
         if(tasklist[index].checked){
             checkbox.checked = true;
             listElement.style.textDecoration = "line-through";
+            numberOfChecked ++;
         }
         else{
             listElement.style.textDecoration = "none";
@@ -37,6 +41,7 @@ function updateTasks(){
         listElement.appendChild(deletebutton);
         taskListElement.appendChild(listElement);        
     }
+    document.getElementById("progressText").innerHTML = numberOfChecked + "/" + String(tasklist.length-deletedTasks) + " tasks completed";
 }
 function checkboxChange(checkbox){
     tasklist[checkbox.id.split("_")[1]].checked = checkbox.checked;
@@ -49,6 +54,7 @@ function deleteTask(button){
         }
         if (tasklist[index].id == button.parentNode.id.split("_")[1]){
             delete tasklist[index];
+            deletedTasks++;
             break;
         }
     }
