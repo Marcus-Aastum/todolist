@@ -1,5 +1,11 @@
 let tasklist = [];
+if(localStorage.getItem("tasklist")){
+    tasklist = JSON.parse(localStorage.getItem("tasklist"));
+}
 let deletedTasks = 0;
+if(localStorage.getItem("deletedtasks")){
+    deletedTasks = JSON.parse(localStorage.getItem("deletedtasks"));
+}
 function addTask(textContent){
     tasklist.push({id: tasklist.length, text: textContent, checked: false});
     document.getElementById("listItemContent").value = "";
@@ -46,6 +52,8 @@ function updateTasks(){
         taskListElement.appendChild(listElement);        
     }
     document.getElementById("progressText").innerHTML = numberOfChecked + "/" + String(tasklist.length-deletedTasks) + " tasks completed";
+    localStorage.setItem("tasklist", JSON.stringify(tasklist));
+    localStorage.setItem("deletedtasks", JSON.stringify(deletedTasks));
 }
 function checkboxChange(checkbox){
     tasklist[checkbox.id.split("_")[1]].checked = checkbox.checked;
@@ -64,6 +72,7 @@ function deleteTask(button){
     }
     updateTasks();
 }
+updateTasks();
 if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     document.getElementById("appcontent").style.width = "80%"
   }
