@@ -7,13 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="index">
+    <!-- Div which contains the actual todo-list -->
     <div id="appcontent">
         <h1>TODO-list</h1>
+
+        <!-- Form element that takes in new task, and calls the addTask() function if input field is not empty, with onsubmit -->
         <form action="" id="addListItem" onsubmit="event.preventDefault(); if(listItemContent.value.split(' ')[0]){addTask(this.listItemContent.value);}" autocomplete="off">
             <input autofocus type="text" name="listItemContent" placeholder="Add task" id="listItemContent" class="inputfield">
             <input type="submit" value="+" id="submitListItem" class="button">
         </form>
+
+        <!-- Text that displays how many tasks have been done, and how many remain -->
         <h3 id="progressText">0/0 tasks completed</h3>
+
+        <!-- UL where tasks get added with li elements in updateTasks() -->
         <ul id="taskList">
             
         </ul>
