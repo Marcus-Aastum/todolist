@@ -1,26 +1,47 @@
+/* Code by https://github.com/marcus-aastum */
+/* Site can be reached at https://todolist.aastum.no */
+
+/* ---Universal styling--- */
 *{
     font-family:  Helvetica, sans-serif;
 }
 body{
     background-color: navy;
 }
-ul {
-    padding: 0%;
+#appcontent{
+    background-color: white;
+    width: 40%;
+    padding: 5vh;
+    border-radius: 25px;
+    text-align: center;
+    margin: auto;
+    margin-top: 10vh;
 }
-button, #submitListItem{
-    background-color: rgb(255, 68, 0);
-    color: white;
-    /* font-size: 2vh; */
-    border-radius: 5px;
+
+/* --Form to add tasks--- */
+#listItemContent{
+    border-radius: 100px;
+    padding: 2vh;
+    width: 30vh;
 }
 #submitListItem{
-    /* padding: 1.5vh, 2vh; */
     font-size: 1.5em;
     border-radius: 100px;
     height: 2em;
     width: 2em;
     vertical-align: middle;
 }
+button, #submitListItem{
+    background-color: rgb(255, 68, 0);
+    color: white;
+    border-radius: 5px;
+}
+
+/* ---List element (task)--- */
+ul {
+    padding: 0%;
+}
+
 li{
     list-style-type: none;
     position: relative;
@@ -30,10 +51,6 @@ li{
     padding-top: 0.5vh;
     padding-right: 1vh;
     padding-left: 1vh;
-}
-p {
-    display: inline-block;
-    width: 80%; 
 }
 li button{
     right: -1vh;
@@ -48,6 +65,10 @@ li button:hover, #submitListItem:hover{
 li input{
     left: -1vh;
     vertical-align: middle;
+}
+p {
+    display: inline-block;
+    width: 80%; 
 }
 .checkbox {
     appearance: none;
@@ -68,21 +89,9 @@ li input{
 .checkbox:checked:hover{
     background-color: rgb(206, 55, 0);
 }
-#appcontent{
-    background-color: white;
-    width: 40%;
-    padding: 5vh;
-    border-radius: 25px;
-    text-align: center;
-    margin: auto;
-    margin-top: 10vh;
-}
 
-#listItemContent{
-    border-radius: 100px;
-    padding: 2vh;
-    width: 30vh;
-}
+
+/* ---Styling for responsiveness--- */
 @media (max-width: 1100px) {
     #appcontent{
         width: 80%;
