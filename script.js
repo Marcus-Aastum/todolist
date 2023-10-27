@@ -10,7 +10,7 @@ function updateTasks(){
     taskListElement.innerHTML = "";
 
     let numberOfChecked = 0;
-    
+
     for (let index = 0; index < tasklist.length; index++) {
         if (!tasklist[index]){
             continue;
@@ -19,10 +19,14 @@ function updateTasks(){
         listElement.id = "task_" + tasklist[index].id;
         let contentText = document.createTextNode(tasklist[index].text);
         
+        let ptag = document.createElement("p");
+        ptag.appendChild(contentText)
+
         let checkbox = document.createElement("input"); 
         checkbox.type = "checkbox";
         checkbox.setAttribute("onchange", "checkboxChange(this)");
         checkbox.id = "checkbox_" + tasklist[index].id;
+        checkbox.className = "checkbox";
         
         let deletebutton = document.createElement("button");
         let deleteText = document.createTextNode("Delete");
@@ -30,14 +34,14 @@ function updateTasks(){
         deletebutton.appendChild(deleteText);
         if(tasklist[index].checked){
             checkbox.checked = true;
-            listElement.style.textDecoration = "line-through";
+            ptag.style.textDecoration = "line-through";
             numberOfChecked ++;
         }
         else{
-            listElement.style.textDecoration = "none";
+            ptag.style.textDecoration = "none";
         }
         listElement.appendChild(checkbox);
-        listElement.appendChild(contentText);
+        listElement.appendChild(ptag);
         listElement.appendChild(deletebutton);
         taskListElement.appendChild(listElement);        
     }
@@ -60,3 +64,6 @@ function deleteTask(button){
     }
     updateTasks();
 }
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    document.getElementById("appcontent").style.width = "80%"
+  }

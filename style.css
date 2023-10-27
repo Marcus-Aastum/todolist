@@ -10,13 +10,16 @@ ul {
 button, #submitListItem{
     background-color: rgb(255, 68, 0);
     color: white;
-    font-size: 2vh;
+    /* font-size: 2vh; */
     border-radius: 5px;
 }
 #submitListItem{
-    padding: 1.5vh, 2vh;
-    font-size: 2.5vh;
+    /* padding: 1.5vh, 2vh; */
+    font-size: 1.5em;
     border-radius: 100px;
+    height: 2em;
+    width: 2em;
+    vertical-align: middle;
 }
 li{
     list-style-type: none;
@@ -25,23 +28,46 @@ li{
     width: 100%;
     padding-bottom: 0.5vh;
     padding-top: 0.5vh;
+    padding-right: 1vh;
+    padding-left: 1vh;
+}
+p {
+    display: inline-block;
+    width: 80%; 
 }
 li button{
-    right: 5vh;
-    position: absolute;
+    right: -1vh;
     background-color: rgb(255, 68, 0);
     color: white;
-    font-size: 2vh;
     border-radius: 5px;
+    vertical-align: middle;
 }
 li button:hover, #submitListItem:hover{
     background-color: rgb(206, 55, 0);
 }
 li input{
-    left: 5vh;
-    position: absolute;
+    left: -1vh;
+    vertical-align: middle;
 }
-
+.checkbox {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    width: 1.4em;
+    height: 1.4em;
+    border: 0.10em solid black;
+    border-radius: 10em;
+  }
+.checkbox:hover{
+    background-color: #ddd;
+}
+.checkbox:checked{
+    background-color: rgb(255, 68, 0);
+}
+.checkbox:checked:hover{
+    background-color: rgb(206, 55, 0);
+}
 #appcontent{
     background-color: white;
     width: 40%;
@@ -56,4 +82,18 @@ li input{
     border-radius: 100px;
     padding: 2vh;
     width: 30vh;
+}
+@media (max-width: 1100px) {
+    #appcontent{
+        width: 80%;
+    } 
+
+}
+@media(max-width: 495px){
+    p{
+        width: 100%;
+    }
+    li{
+        border-bottom: 0.1em solid #eee;
+    }
 }
