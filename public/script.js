@@ -2,18 +2,23 @@
 //Site can be reached at https://todolist.aastum.no
 
 let tasklist = []; //List of all tasks
-if(localStorage.getItem("tasklist")){ //checks if tasklist is in localstorage, and if so uses localstorage vlue
-    tasklist = JSON.parse(localStorage.getItem("tasklist"));
-}
-
-let deletedTasks = 0; //Amount of tasks that have been deleted, used to check how many total tasks are in tasklist
-if(localStorage.getItem("deletedtasks")){ //uses localstorage value if present
-    deletedTasks = JSON.parse(localStorage.getItem("deletedtasks"));
-}
 
 //Function that pushes a new task to tasklist, triggered by form submit. Also clears input element
 function addTask(textContent){
-    tasklist.push({id: tasklist.length, text: textContent, checked: false});
+    fetch('/api/tasksend', {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({id: tasklist.length, text: textContent, checked: false})
+    })
+    .then(response =>{
+        if(response.ok){
+            console.log("Data sent :)");
+            updateTasks();
+        }
+    })
+    .catch(error =>{
+        console.error(error);
+    });
     document.getElementById("listItemContent").value = "";
     updateTasks()
 }
@@ -75,11 +80,11 @@ function updateTasks(){
     }
 
     //update how many tasks have been completed
-    document.getElementById("progressText").innerHTML = numberOfChecked + "/" + String(tasklist.length-deletedTasks) + " tasks completed";
+    //document.getElementById("progressText").innerHTML = numberOfChecked + "/" + String(tasklist.length-deletedTasks) + " tasks completed";
     
     //Save items to localstorage for persistence
     localStorage.setItem("tasklist", JSON.stringify(tasklist));
-    localStorage.setItem("deletedtasks", JSON.stringify(deletedTasks));
+    //localStorage.setItem("deletedtasks", JSON.stringify(deletedTasks));
 }
 
 //function that gets called when a checkbox is changed, and marks the task as completed/not completed
