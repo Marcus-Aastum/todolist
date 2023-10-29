@@ -15,6 +15,11 @@
         <h1>TODO-list</h1>
 
         <!-- Form element that takes in new task, and calls the addTask() function if input field is not empty, with onsubmit -->
+        <form action="" onsubmit="document.cookie = 'friendCode=' + this.friendcode.value">
+            <input type="text" name="friendcode" id="" placeholder="Friend code">
+            <input type="submit" value="Add">
+        </form>
+        <p id="friendCodeText">Friend code: </p>
         <form action="" id="addListItem" onsubmit="event.preventDefault(); if(listItemContent.value.split(' ')[0]){addTask(this.listItemContent.value);}" autocomplete="off">
             <input autofocus type="text" name="listItemContent" placeholder="Add task" id="listItemContent" class="inputfield">
             <input type="submit" value="+" id="submitListItem" class="button">
