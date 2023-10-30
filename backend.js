@@ -30,6 +30,13 @@ app.post('/api/tasksend', (req, res) =>{
                 }
             }
         }
+        else if (req.body.text == "updatecheck"){
+            for (let index = 0; index < tasklist.length; index++) {
+                if (req.body.id == tasklist[index].id){
+                    tasklist[index].checked = req.body.checked;
+                }
+            }
+        }
         else {tasklist.push(req.body);}
         for (let index = 0; index < tasklist.length; index++) {
             if (!tasklist[index]){

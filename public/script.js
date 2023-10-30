@@ -100,11 +100,26 @@ async function updateTasks(){
     
     //Save items to localstorage for persistence
     //localStorage.setItem("deletedtasks", JSON.stringify(deletedTasks));
+    document.getElementById("friendCodeText").innerHTML = "Friend code: " + document.cookie.split("=")[1]
 }
 
 //function that gets called when a checkbox is changed, and marks the task as completed/not completed
 function checkboxChange(checkbox){
     tasklist[checkbox.id.split("_")[1]].checked = checkbox.checked;
+    fetch('/api/tasksend', {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({id: checkbox.id.split("_")[1], text: "updatecheck", checked: checkbox.checked})
+    })
+    .then(response =>{
+        if(response.ok){
+            console.log("Data sent :)");
+            //updateTasks();
+        }
+    })
+    .catch(error =>{
+        console.error(error);
+    });
     updateTasks();  
 }
 
