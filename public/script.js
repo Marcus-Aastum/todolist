@@ -1,6 +1,7 @@
 // Code by https://github.com/marcus-aastum
 //Site can be reached at https://todolist.aastum.no
 
+tasklist = []
 
 //Function that pushes a new task to tasklist, triggered by form submit. Also clears input element
 function addTask(textContent){
@@ -74,7 +75,7 @@ async function updateTasks(){
         //create delete button to delete a task
         let deletebutton = document.createElement("button");
         let deleteText = document.createTextNode("Delete");
-        deletebutton.setAttribute("onclick", "deleteTask(this)");
+        deletebutton.setAttribute("onclick", "deleteTask(this.parentNode.id.split('_')[1])");
         deletebutton.appendChild(deleteText);
 
         //cross out task if it has been marked as completed
@@ -95,7 +96,7 @@ async function updateTasks(){
     }
 
     //update how many tasks have been completed
-    //document.getElementById("progressText").innerHTML = numberOfChecked + "/" + String(tasklist.length-deletedTasks) + " tasks completed";
+    document.getElementById("progressText").innerHTML = numberOfChecked + "/" + String(tasklist.length) + " tasks completed";
     
     //Save items to localstorage for persistence
     //localStorage.setItem("deletedtasks", JSON.stringify(deletedTasks));
@@ -108,21 +109,23 @@ function checkboxChange(checkbox){
 }
 
 //Function to delete tasks when delete button is pressed
-function deleteTask(button){
+function deleteTask(id){
     //for loop iterates through all tasks
-    for (let index = 0; index < tasklist.length; index++) {
-        //skip element if task does not exist
-        if (!tasklist[index]){
-            continue;
+    fetch('/api/tasksend', {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({id: id, text: "", checked: false})
+    })
+    .then(response =>{
+        if(response.ok){
+            console.log("Data sent :)");
+            //updateTasks();
         }
-        //delete task if id of parent list elements id of button (task_x) is the same as the current task in loop (x)
-        if (tasklist[index].id == button.parentNode.id.split("_")[1]){
-            delete tasklist[index];
-            deletedTasks++; //updates amount of tasks that have been deleted
-            break;
-        }
-    }
-    updateTasks();
+    })
+    .catch(error =>{
+        console.error(error);
+    });
+    updateTasks()
 }
 //writes tasks to screen when page is loaded
 updateTasks();

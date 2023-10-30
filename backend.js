@@ -21,9 +21,23 @@ app.post('/api/tasksend', (req, res) =>{
             fs.writeFileSync('data/'+req.cookies.friendCode+'.json', JSON.stringify([]))
             tasklist = JSON.parse(fs.readFileSync('data/'+req.cookies.friendCode+'.json'));
         }
-        tasklist.push(req.body);
+        if (req.body.text == ""){
+            for (let index = 0; index < tasklist.length; index++) {
+                if(tasklist[index]){
+                    if (tasklist[index].id == req.body.id){
+                        delete tasklist[index]
+                    }
+                }
+            }
+        }
+        else {tasklist.push(req.body);}
         for (let index = 0; index < tasklist.length; index++) {
-            tasklist[index].id = index;
+            if (!tasklist[index]){
+                tasklist.splice(index, 1)
+            }
+        }
+        for (let index = 0; index < tasklist.length; index++) {
+            tasklist[index].id = index;        
         }
         fs.writeFileSync('data/'+req.cookies.friendCode+'.json', JSON.stringify(tasklist));
         console.log(tasklist);

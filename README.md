@@ -7,4 +7,4 @@
 - [x] Save seperate tasklists for seperate share-link
 - [x] Send and recieve data correctly between backend and website
 - [ ] Add check-uncheck functionality
-- [ ] Add delete functionality
+- [x] Add delete functionality
