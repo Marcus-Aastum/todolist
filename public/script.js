@@ -1,7 +1,6 @@
 // Code by https://github.com/marcus-aastum
 //Site can be reached at https://todolist.aastum.no
 
-let tasklist = []; //List of all tasks
 
 //Function that pushes a new task to tasklist, triggered by form submit. Also clears input element
 function addTask(textContent){
@@ -13,7 +12,7 @@ function addTask(textContent){
     .then(response =>{
         if(response.ok){
             console.log("Data sent :)");
-            updateTasks();
+            //updateTasks();
         }
     })
     .catch(error =>{
@@ -24,8 +23,22 @@ function addTask(textContent){
 }
 
 //Function that writes task to screen
-function updateTasks(){
-
+async function updateTasks(){
+    await fetch('/api/tasklist', {
+        method:"GET",
+        headers:{"Content-Type":"application/json"}
+    })
+    .then(response =>{
+        if (response.ok){
+            return response.json();
+        }
+    })
+    .then(data =>{
+        localStorage.setItem("tasklist", JSON.stringify(data));
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
     //clears old ul of all tasks
     taskListElement = document.getElementById("taskList");
     taskListElement.innerHTML = "";
@@ -33,8 +46,10 @@ function updateTasks(){
     let numberOfChecked = 0; //variable that checks how many tasks have been completed
 
     //For loop that loops through list of tasks to print them to website
+    tasklist = JSON.parse(JSON.parse(localStorage.getItem("tasklist")))
+    //tasklist = Array(tasklist)
+    console.log(tasklist)
     for (let index = 0; index < tasklist.length; index++) {
-
         //if current element of list doesn't exist, skip to next element
         if (!tasklist[index]){
             continue;
@@ -83,7 +98,6 @@ function updateTasks(){
     //document.getElementById("progressText").innerHTML = numberOfChecked + "/" + String(tasklist.length-deletedTasks) + " tasks completed";
     
     //Save items to localstorage for persistence
-    localStorage.setItem("tasklist", JSON.stringify(tasklist));
     //localStorage.setItem("deletedtasks", JSON.stringify(deletedTasks));
 }
 
