@@ -52,7 +52,17 @@ app.post('/api/tasksend', (req, res) =>{
     }
 })
 app.get('/api/tasklist', (req, res) =>{
-    dataToSend = JSON.parse(fs.readFileSync('data/'+req.cookies.friendCode+'.json'));
+    try {
+        if(req.cookies.friendCode){
+            dataToSend = JSON.parse(fs.readFileSync('data/'+req.cookies.friendCode+'.json'));
+        }
+        else{
+            dataToSend = [];
+        }
+    } catch (error) {
+        fs.writeFileSync('data/'+req.cookies.friendCode+'.json', JSON.stringify([]));
+        dataToSend = JSON.parse(fs.readFileSync('data/'+req.cookies.friendCode+'.json'));
+    }
     res.json(JSON.stringify(dataToSend));
 })
 
